@@ -7,7 +7,7 @@ const app = express();
 
 // 为应用使用中间件
 // 静态文件中间件
-app.use(express.static(path.join(__dirname, "../../build")));
+app.use(express.static(path.join(__dirname, "../build")));
 // 请求体 parse 中间件，用于 parse json 格式请求体
 app.use(express.json());
 

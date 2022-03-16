@@ -15,7 +15,8 @@
         "*.{js,css,md,ts,tsx}": "prettier --write"
     },
     "scripts": {
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "deploy": "cd frontend && yarn build && cd ../backend && inspirecloud deploy"
     },
     "dependencies": {}
 }
