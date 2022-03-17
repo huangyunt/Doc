@@ -16,7 +16,8 @@
     },
     "scripts": {
         "prepare": "husky install",
-        "deploy": "cd frontend && yarn build && cd ../backend && inspirecloud deploy"
+        "deploy": "cd frontend && yarn build && cd ../backend && inspirecloud deploy",
+        "start": "cd frontend && yarn start"
     },
     "dependencies": {}
 }
