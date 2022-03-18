@@ -6,31 +6,31 @@ import Register from "../containers/Register";
 import Doc from "../containers/Doc";
 
 export default function IRouter() {
-    const style: React.CSSProperties = {
-        listStyle: "none",
-    };
-    return (
-        <React.Fragment>
-            <ul style={style}>
-                <li>
-                    <Link to="/login">login</Link>
-                </li>
-                <li>
-                    <Link to="/register">register</Link>
-                </li>
-                <li>
-                    <Link to="/workspace">workspace</Link>
-                </li>
-                <li>
-                    <Link to="/doc">doc</Link>
-                </li>
-            </ul>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/workspace" element={<WorkSpace />} />
-                <Route path="/doc" element={<Doc />} />
-            </Routes>
-        </React.Fragment>
-    );
+  const style: React.CSSProperties = {
+    listStyle: "none",
+  };
+  return (
+    <React.Fragment>
+      <ul style={style}>
+        <li>
+          <Link to="/login">login</Link>
+        </li>
+        <li>
+          <Link to="/register">register</Link>
+        </li>
+        <li>
+          <Link to="/workspace">workspace</Link>
+        </li>
+        <li>
+          <Link to="/doc">doc</Link>
+        </li>
+      </ul>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/workspace" element={<WorkSpace />} />
+        <Route path="/doc" element={<Doc />} />
+      </Routes>
+    </React.Fragment>
+  );
 }
