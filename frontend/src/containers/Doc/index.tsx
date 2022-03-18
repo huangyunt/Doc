@@ -1,5 +1,10 @@
 import React from "react";
+import IconBreadcrumbs from "./components/IconBreadcrumbs";
 
 export default function Doc() {
-    return <div>Doc</div>;
+    return (
+        <div>
+            <IconBreadcrumbs />
+        </div>
+    );
 }
