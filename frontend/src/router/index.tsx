@@ -11,6 +11,12 @@ export default function IRouter() {
   };
   return (
     <React.Fragment>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/workspace" element={<WorkSpace />} />
+        <Route path="/doc" element={<Doc />} />
+      </Routes>
       <ul style={style}>
         <li>
           <Link to="/login">login</Link>
@@ -25,12 +31,6 @@ export default function IRouter() {
           <Link to="/doc">doc</Link>
         </li>
       </ul>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/workspace" element={<WorkSpace />} />
-        <Route path="/doc" element={<Doc />} />
-      </Routes>
     </React.Fragment>
   );
 }
