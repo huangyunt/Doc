@@ -30,7 +30,15 @@ const RichTextExample = () => {
 
   return (
     <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
-      <Toolbar>
+      <Toolbar
+        style={{
+          display: "flex",
+          height: 40,
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 0,
+        }}
+      >
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
         <MarkButton format="underline" icon="format_underlined" />
