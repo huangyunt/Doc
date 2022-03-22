@@ -17,7 +17,7 @@ export default function IconBreadcrumbs() {
         <Link
           underline="hover"
           sx={{ display: "flex", alignItems: "center" }}
-          color="inherit"
+          color="rgb(170, 170, 170)"
           href="/"
         >
           <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
@@ -26,7 +26,7 @@ export default function IconBreadcrumbs() {
         <Link
           underline="hover"
           sx={{ display: "flex", alignItems: "center" }}
-          color="inherit"
+          color="rgb(170, 170, 170)"
           href="/getting-started/installation/"
         >
           <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
@@ -34,7 +34,7 @@ export default function IconBreadcrumbs() {
         </Link>
         <Typography
           sx={{ display: "flex", alignItems: "center" }}
-          color="text.primary"
+          color="rgb(170, 170, 170)"
         >
           <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
           Breadcrumb
