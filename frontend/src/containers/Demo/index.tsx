@@ -8,7 +8,7 @@ import {
   Descendant,
   Element as SlateElement,
 } from "slate";
-import { withHistory } from "slate-history";
+import { withHistory, History } from "slate-history";
 
 import { Button, Icon, Toolbar } from "./components";
 

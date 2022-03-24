@@ -4,7 +4,7 @@ import WorkSpace from "../containers/Workspace";
 import Login from "../containers/Login";
 import Register from "../containers/Register";
 import Doc from "../containers/Doc";
-
+import Test from "../containers/Demo2";
 export default function IRouter() {
   const style: React.CSSProperties = {
     listStyle: "none",
@@ -15,7 +15,8 @@ export default function IRouter() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/workspace" element={<WorkSpace />} />
-        <Route path="/" element={<Doc />} />
+        <Route path="/doc" element={<Doc />} />
+        <Route path="/" element={<Test />} />
       </Routes>
       <ul style={style}>
         <li>
@@ -28,7 +29,7 @@ export default function IRouter() {
           <Link to="/workspace">workspace</Link>
         </li>
         <li>
-          <Link to="/">doc</Link>
+          <Link to="/doc">doc</Link>
         </li>
       </ul>
     </React.Fragment>
