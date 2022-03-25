@@ -1,7 +1,5 @@
 //express_demo.js 文件
 const express = require("express");
-const bodyParser = require("body-parser");
-const axios = require("axios");
 const { create } = require("./utils/createAccount");
 const app = express();
 app.use(require("body-parser").urlencoded({ extended: false }));
@@ -38,3 +36,4 @@ function errorHandler(err, req, res, next) {
 
 // 导出 Express 对象
 module.exports = app;
+export {};

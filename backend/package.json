@@ -19,7 +19,7 @@
   "repository": {},
   "license": "ISC",
   "scripts": {
-    "deploy": "inspirecloud deploy",
-    "dev": "inspirecloud dev -p 8080"
+    "deploy": "tsc && inspirecloud deploy",
+    "dev": "tsc && inspirecloud dev -p 8080"
   }
 }

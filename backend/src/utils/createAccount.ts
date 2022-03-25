@@ -11,3 +11,4 @@ const create = async (account, password) => {
 module.exports = {
     create,
 };
+export {};
