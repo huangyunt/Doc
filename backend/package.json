@@ -8,6 +8,8 @@
   ],
   "dependencies": {
     "@byteinspire/inspirecloud-api": "*",
+    "axios": "^0.26.1",
+    "body-parser": "^1.19.2",
     "express": "^4.17.1"
   },
   "publishConfig": {
@@ -16,5 +18,8 @@
   },
   "repository": {},
   "license": "ISC",
-  "scripts": {}
+  "scripts": {
+    "deploy": "inspirecloud deploy",
+    "dev": "inspirecloud dev -p 8080"
+  }
 }

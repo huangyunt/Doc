@@ -1,4 +1,6 @@
 {
   "main": "index.js",
-  "watch": ["**/*.js"]
+  "watch": [
+    "**/*.js"
+  ]
 }
