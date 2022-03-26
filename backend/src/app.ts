@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import { create, RegisterCode } from "./utils/createAccount";
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded());
 // 注册接口
 app.post("/register", async (req, res) => {
     console.log("@@", req.body);
