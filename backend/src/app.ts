@@ -1,10 +1,10 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const { create, RegisterCode } = require("./utils/createAccount");
+// const express = require("express");
+import express from "express";
+import bodyParser from "body-parser";
+import { create, RegisterCode } from "./utils/createAccount";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
-
 // 注册接口
 app.post("/register", async (req, res) => {
     console.log("@@", req.body);
@@ -43,4 +43,3 @@ function errorHandler(err, req, res, next) {
 
 // 导出 Express 对象
 module.exports = app;
-export {};

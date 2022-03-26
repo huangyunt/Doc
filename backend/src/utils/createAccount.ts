@@ -1,9 +1,9 @@
 const inspirecloud = require("@byteinspire/inspirecloud-api");
-enum RegisterCode {
+export enum RegisterCode {
     Existed = 0,
     Success,
 }
-const create = async (account, password) => {
+export const create = async (account, password) => {
     // 使用 inspirecloud.db.table 获取数据表
     const AccountTable = inspirecloud.db.table("account");
     const findOne = await AccountTable.where({
@@ -28,8 +28,3 @@ const create = async (account, password) => {
         };
     }
 };
-module.exports = {
-    RegisterCode,
-    create,
-};
-export {};
