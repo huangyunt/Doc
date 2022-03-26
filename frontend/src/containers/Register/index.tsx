@@ -3,9 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -15,45 +13,11 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material/styles";
-import { URL } from "../../utils/url";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { createAccount } from "../../utils/api";
 
 const theme = createTheme();
 
 export default function Register() {
-  const createAccount = async (textData) => {
-    try {
-      const res = await fetch(URL + "/register", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type":
-            "application/x-www-form-urlencoded",
-        },
-        body: textData, // body data type must match "Content-Type" header
-      });
-      return await res.json();
-    } catch (error) {
-      console.log("Register request failed", error);
-    }
-  };
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -67,13 +31,13 @@ export default function Register() {
     console.log(res);
   };
 
-  // const handleChange = (
-  //   event: React.FormEvent<HTMLFormElement>
-  // ) => {};
-
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        style={{ paddingTop: 80 }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -93,7 +57,12 @@ export default function Register() {
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{
+              mt: 3,
+              border: "1px solid hsla(210,18%,87%,1);",
+              padding: "40px",
+              borderRadius: "6px",
+            }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -128,17 +97,6 @@ export default function Register() {
                   autoComplete="comfirm-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="allowExtraEmails"
-                      color="primary"
-                    />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -150,14 +108,13 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/login">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
