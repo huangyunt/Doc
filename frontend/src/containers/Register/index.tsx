@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { URL } from "../../utils/url";
 
 function Copyright(props: any) {
   return (
@@ -34,14 +35,43 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Register() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
+    const accountData = {
+      account: data.get("email"),
       password: data.get("password"),
-    });
+    };
+    // const res = await fetch(URL + "/register", {
+    //   method: "POST",
+    //   mode: "cors",
+    //   // headers: {
+    //   //   "Content-Type": "application/json",
+    //   // },
+    //   body: JSON.stringify(accountData), // body data type must match "Content-Type" header
+    // });
+    // console.log("res: ", res);
+    fetch(URL + "/register", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify(accountData), // body data type must match "Content-Type" header
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        console.log("获取的结果", json.data);
+        return json;
+      })
+      .catch((err) => {
+        console.log("请求错误", err);
+      });
   };
+
+  const handleChange = (event: React.FormEvent<HTMLFormElement>) => {};
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,27 +98,6 @@ export default function Register() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -108,6 +117,17 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="comfirm-password"
+                  label="Comfirm password"
+                  type="comfirm-password"
+                  id="comfirm-password"
+                  autoComplete="comfirm-password"
                 />
               </Grid>
               <Grid item xs={12}>

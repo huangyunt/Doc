@@ -1,15 +1,22 @@
-//express_demo.js 文件
 const express = require("express");
-const { create } = require("./utils/createAccount");
+const bodyParser = require("body-parser");
+const { create, RegisterCode } = require("./utils/createAccount");
+
 const app = express();
-app.use(require("body-parser").urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // 注册接口
 app.post("/register", async (req, res) => {
     console.log("@@", req.body);
     const { account, password } = req.body;
-    const rez = await create(account, password);
-    res.send(rez);
+    const { code, result } = await create(account, password);
+    res.set({
+        // "Content-Type": "application/x-www-form-urlencoded",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST",
+    });
+    res.send(result);
+    // res.sendStatus(code);
 });
 
 // 请求体 parse 中间件，用于 parse json 格式请求体
