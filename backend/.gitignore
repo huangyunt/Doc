@@ -1,6 +1,7 @@
 node_modules/
 build/  
 .vscode/
+dist/
 .idea/
 .DS_Store
 .inspirecloud.service.conf
