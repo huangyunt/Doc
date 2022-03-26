@@ -11,7 +11,10 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider,
+} from "@mui/material/styles";
 import { URL } from "../../utils/url";
 
 function Copyright(props: any) {
@@ -35,43 +38,38 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Register() {
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const createAccount = async (textData) => {
+    try {
+      const res = await fetch(URL + "/register", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type":
+            "application/x-www-form-urlencoded",
+        },
+        body: textData, // body data type must match "Content-Type" header
+      });
+      return await res.json();
+    } catch (error) {
+      console.log("Register request failed", error);
+    }
+  };
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const accountData = {
-      account: data.get("email"),
-      password: data.get("password"),
-    };
-    // const res = await fetch(URL + "/register", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   // headers: {
-    //   //   "Content-Type": "application/json",
-    //   // },
-    //   body: JSON.stringify(accountData), // body data type must match "Content-Type" header
-    // });
-    // console.log("res: ", res);
-    fetch(URL + "/register", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: JSON.stringify(accountData), // body data type must match "Content-Type" header
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        console.log("获取的结果", json.data);
-        return json;
-      })
-      .catch((err) => {
-        console.log("请求错误", err);
-      });
+    const textData =
+      `account=${data.get("email")}` +
+      "&" +
+      `password=${data.get("password")}`;
+    const res = await createAccount(textData);
+    console.log(res);
   };
 
-  const handleChange = (event: React.FormEvent<HTMLFormElement>) => {};
+  // const handleChange = (
+  //   event: React.FormEvent<HTMLFormElement>
+  // ) => {};
 
   return (
     <ThemeProvider theme={theme}>
@@ -133,7 +131,10 @@ export default function Register() {
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
+                    <Checkbox
+                      value="allowExtraEmails"
+                      color="primary"
+                    />
                   }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />

@@ -9,14 +9,13 @@ app.use(bodyParser.urlencoded());
 app.post("/register", async (req, res) => {
     console.log("@@", req.body);
     const { account, password } = req.body;
-    const { code, result } = await create(account, password);
+    const response = await create(account, password);
     res.set({
-        // "Content-Type": "application/x-www-form-urlencoded",
+        // "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST",
     });
-    res.send(result);
-    // res.sendStatus(code);
+    res.send(response);
 });
 
 // 请求体 parse 中间件，用于 parse json 格式请求体
