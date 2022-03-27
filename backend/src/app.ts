@@ -1,7 +1,8 @@
 // const express = require("express");
 import express from "express";
 import bodyParser from "body-parser";
-import { create, RegisterCode } from "./utils/createAccount";
+import { createAccount, RegisterCode } from "./utils/createAccount";
+import { authenAccount } from "./utils/authAccount";
 
 const app = express();
 app.use(bodyParser.urlencoded());
@@ -9,7 +10,19 @@ app.use(bodyParser.urlencoded());
 app.post("/register", async (req, res) => {
     console.log("@@", req.body);
     const { account, password } = req.body;
-    const response = await create(account, password);
+    const response = await createAccount(account, password);
+    res.set({
+        // "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST",
+    });
+    res.send(response);
+});
+
+app.post("/login", async (req, res) => {
+    console.log("@@", req.body);
+    const { account, password } = req.body;
+    const response = await authenAccount(account, password);
     res.set({
         // "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
