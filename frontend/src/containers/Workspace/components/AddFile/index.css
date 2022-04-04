@@ -1,0 +1,35 @@
+.card {
+  font-weight: 500;
+  height: 72px;
+  padding: 20px 12px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+  display: flex;
+  flex-grow: 1;
+  justify-content: start;
+  align-items: center;
+  border-radius: 6px;
+  cursor: default;
+  background-color: var(--color-bg, #fff);
+  transition: background-color 0.2s;
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.new_file_creation_topbar--subtext--3YpLo {
+  font-weight: 400;
+  color: var(--color-text-secondary, #7d7d7d);
+}
+
+.text--fontPos11--RSei3 {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: calc(
+    0.005px + var(--text-tracking-pos, 0) * 11px
+  );
+}
+.text--_fontBase--YWDo0 {
+  font-family: Inter, sans-serif;
+}
