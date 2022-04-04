@@ -3,6 +3,7 @@
   height: 210px;
   background-color: rgb(229, 229, 229);
   border-radius: 7.5px;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
 }
 
 .card-wrapper:hover {
@@ -12,7 +13,6 @@
 
 .card-bottom-wrapper {
   font-weight: 500;
-  height: 80px;
   padding: 20px 12px;
   box-sizing: border-box;
   /* border: 1px solid var(--color-border, rgba(0, 0, 0, 0.1)); */

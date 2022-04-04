@@ -14,6 +14,12 @@ import {
   ThemeProvider,
 } from "@mui/material/styles";
 import { createAccount } from "../../utils/api";
+import { createFromIconfontCN } from "@ant-design/icons";
+import "./index.css";
+
+const RegisterIcon = createFromIconfontCN({
+  scriptUrl: "//at.alicdn.com/t/font_3303310_jzl7g2hidn.js",
+});
 
 const theme = createTheme();
 
@@ -47,9 +53,10 @@ export default function Register() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <RegisterIcon
+            type="icon-a-huaban2fuben14"
+            className="register-svg"
+          />
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>

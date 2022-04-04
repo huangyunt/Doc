@@ -1,10 +1,8 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
@@ -15,6 +13,12 @@ import {
 import PasswordText from "./components/PasswordText/PasswordText";
 import AccountText from "./components/AccountText/AccountText";
 import { authenAccount } from "../../utils/api";
+import { createFromIconfontCN } from "@ant-design/icons";
+import "./index.css";
+
+const LoginIcon = createFromIconfontCN({
+  scriptUrl: "//at.alicdn.com/t/font_3303310_jzl7g2hidn.js",
+});
 
 const theme = createTheme();
 
@@ -48,9 +52,10 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <LoginIcon
+            type="icon-a-huaban2fuben15"
+            className="login-svg"
+          />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
