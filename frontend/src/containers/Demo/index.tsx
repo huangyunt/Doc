@@ -1,6 +1,15 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import isHotkey from "is-hotkey";
-import { Editable, withReact, useSlate, Slate } from "slate-react";
+import {
+  Editable,
+  withReact,
+  useSlate,
+  Slate,
+} from "slate-react";
 import {
   Editor,
   Transforms,
@@ -9,8 +18,8 @@ import {
   Element as SlateElement,
 } from "slate";
 import { withHistory, History } from "slate-history";
-
 import { Button, Icon, Toolbar } from "./components";
+import { Image } from "./components/Image";
 
 const HOTKEYS = {
   "mod+b": "bold",
@@ -20,13 +29,28 @@ const HOTKEYS = {
 };
 
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
-const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"];
+const TEXT_ALIGN_TYPES = [
+  "left",
+  "center",
+  "right",
+  "justify",
+];
 
 const RichTextExample = () => {
-  const [value, setValue] = useState<Descendant[]>(initialValue);
-  const renderElement = useCallback((props) => <Element {...props} />, []);
-  const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const [value, setValue] =
+    useState<Descendant[]>(initialValue);
+  const renderElement = useCallback(
+    (props) => <Element {...props} />,
+    []
+  );
+  const renderLeaf = useCallback(
+    (props) => <Leaf {...props} />,
+    []
+  );
+  const editor = useMemo(
+    () => withHistory(withReact(createEditor())),
+    []
+  );
 
   return (
     <Slate
@@ -49,17 +73,47 @@ const RichTextExample = () => {
       >
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
-        <MarkButton format="underline" icon="format_underlined" />
+        <MarkButton
+          format="underline"
+          icon="format_underlined"
+        />
         <MarkButton format="code" icon="code" />
-        <BlockButton format="heading-one" icon="looks_one" />
-        <BlockButton format="heading-two" icon="looks_two" />
-        <BlockButton format="block-quote" icon="format_quote" />
-        <BlockButton format="numbered-list" icon="format_list_numbered" />
-        <BlockButton format="bulleted-list" icon="format_list_bulleted" />
-        <BlockButton format="left" icon="format_align_left" />
-        <BlockButton format="center" icon="format_align_center" />
-        <BlockButton format="right" icon="format_align_right" />
-        <BlockButton format="justify" icon="format_align_justify" />
+        <BlockButton
+          format="heading-one"
+          icon="looks_one"
+        />
+        <BlockButton
+          format="heading-two"
+          icon="looks_two"
+        />
+        <BlockButton
+          format="block-quote"
+          icon="format_quote"
+        />
+        <BlockButton
+          format="numbered-list"
+          icon="format_list_numbered"
+        />
+        <BlockButton
+          format="bulleted-list"
+          icon="format_list_bulleted"
+        />
+        <BlockButton
+          format="left"
+          icon="format_align_left"
+        />
+        <BlockButton
+          format="center"
+          icon="format_align_center"
+        />
+        <BlockButton
+          format="right"
+          icon="format_align_right"
+        />
+        <BlockButton
+          format="justify"
+          icon="format_align_justify"
+        />
       </Toolbar>
       <Editable
         renderElement={renderElement}
@@ -104,7 +158,11 @@ const toggleBlock = (editor, format) => {
     };
   } else {
     newProperties = {
-      type: isActive ? "paragraph" : isList ? "list-item" : format,
+      type: isActive
+        ? "paragraph"
+        : isList
+        ? "list-item"
+        : format,
     };
   }
   Transforms.setNodes<SlateElement>(editor, newProperties);
@@ -125,7 +183,11 @@ const toggleMark = (editor, format) => {
   }
 };
 
-const isBlockActive = (editor, format, blockType = "type") => {
+const isBlockActive = (
+  editor,
+  format,
+  blockType = "type"
+) => {
   const { selection } = editor;
   if (!selection) return false;
 
@@ -147,9 +209,12 @@ const isMarkActive = (editor, format) => {
   return marks ? marks[format] === true : false;
 };
 
-const Element = ({ attributes, children, element }) => {
+const Element = (props) => {
+  const { attributes, children, element } = props;
   const style = { textAlign: element.align };
   switch (element.type) {
+    case "image":
+      return <Image {...props} />;
     case "block-quote":
       return (
         <blockquote style={style} {...attributes}>

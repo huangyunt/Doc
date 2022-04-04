@@ -1,9 +1,14 @@
 import React, { useMemo, useState } from "react";
-import IconBreadcrumbs from "./components/IconBreadcrumbs";
+import IconBreadcrumbs from "../../components/IconBreadcrumbs";
 // Import the Slate editor factory.
 import { createEditor, Descendant } from "slate";
 // Import the Slate components and React plugin.
-import { Slate, Editable, withReact, ReactEditor } from "slate-react";
+import {
+  Slate,
+  Editable,
+  withReact,
+  ReactEditor,
+} from "slate-react";
 import RichTextExample from "../Demo/index";
 import "./index.css";
 
@@ -35,20 +40,23 @@ const style: React.CSSProperties = {
 //   }
 // })
 export default function Doc() {
-  const editor = useMemo(() => withReact(createEditor() as ReactEditor), []);
+  const editor = useMemo(
+    () => withReact(createEditor() as ReactEditor),
+    []
+  );
   const [value, setValue] = useState<Descendant[]>([
     {
       type: "paragraph",
-      children: [{ text: "A line of text in a paragraph." }],
+      children: [
+        { text: "A line of text in a paragraph." },
+      ],
     } as Descendant,
   ]);
 
   // 渲染 Slate 上下文.
   return (
     <React.Fragment>
-      <div className="nav-wrapper">
-        <IconBreadcrumbs />
-      </div>
+      <IconBreadcrumbs />
       <div className="editor-wrapper">
         <div style={style}>
           {/* <Slate
