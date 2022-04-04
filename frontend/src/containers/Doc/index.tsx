@@ -1,14 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import IconBreadcrumbs from "../../components/IconBreadcrumbs";
-// Import the Slate editor factory.
-import { createEditor, Descendant } from "slate";
 // Import the Slate components and React plugin.
-import {
-  Slate,
-  Editable,
-  withReact,
-  ReactEditor,
-} from "slate-react";
 import RichTextExample from "../Demo/index";
 import "./index.css";
 
@@ -40,41 +32,12 @@ const style: React.CSSProperties = {
 //   }
 // })
 export default function Doc() {
-  const editor = useMemo(
-    () => withReact(createEditor() as ReactEditor),
-    []
-  );
-  const [value, setValue] = useState<Descendant[]>([
-    {
-      type: "paragraph",
-      children: [
-        { text: "A line of text in a paragraph." },
-      ],
-    } as Descendant,
-  ]);
-
   // 渲染 Slate 上下文.
   return (
     <React.Fragment>
       <IconBreadcrumbs />
       <div className="editor-wrapper">
         <div style={style}>
-          {/* <Slate
-            editor={editor}
-            value={value}
-            onChange={(newValue) => setValue(newValue)}
-          >
-            <Editable
-              onKeyDown={(event) => {
-                if (event.key === "&") {
-                  // 阻止插入 `&` 字符的默认事件
-                  event.preventDefault();
-                  // 执行 insertText 方法插入某些文本
-                  editor.insertText("and");
-                }
-              }}
-            />
-          </Slate> */}
           <RichTextExample />
         </div>
       </div>
