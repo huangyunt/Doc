@@ -22,7 +22,7 @@ const Icon: React.FC = () => {
         <path
           d="M7 28h18c.552 0 1-.448 1-1V9.914c0-.265-.105-.52-.293-.707l-4.914-4.914C20.605 4.105 20.35 4 20.086 4H7c-.552 0-1 .448-1 1v22c0 .552.448 1 1 1z"
           fillRule="nonzero"
-          fill="rgba(44,44,44, 0.9);"
+          fill="rgba(44,44,44, 0.9)"
           stroke="none"
         ></path>
         <path
@@ -35,7 +35,7 @@ const Icon: React.FC = () => {
         <path
           d="M20.5 8.5V4l1.707 1.707 2.086 2.086L26 9.5h-4.5c-.552 0-1-.448-1-1z"
           fillRule="nonzero"
-          fill="rgba(44,44,44, 0.9);"
+          fill="rgba(44,44,44, 0.9)"
           stroke="none"
         ></path>
       </svg>
