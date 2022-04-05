@@ -10,7 +10,9 @@
     "@byteinspire/inspirecloud-api": "*",
     "axios": "^0.26.1",
     "body-parser": "^1.19.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nanoid": "^3.3.2",
+    "uuid": "^8.3.2"
   },
   "publishConfig": {
     "access": "public",
@@ -21,5 +23,8 @@
   "scripts": {
     "deploy": "tsc && inspirecloud deploy",
     "dev": "tsc && inspirecloud dev -p 8080"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4"
   }
 }

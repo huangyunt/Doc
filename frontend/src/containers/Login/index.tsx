@@ -84,7 +84,13 @@ export default function Login() {
             <Grid container>
               <Grid item xs></Grid>
               <Grid item>
-                <Link to="/register">
+                <Link
+                  to="/register"
+                  style={{
+                    textDecoration: "none",
+                    color: "#0969da",
+                  }}
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

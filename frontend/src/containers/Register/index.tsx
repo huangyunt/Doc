@@ -115,7 +115,13 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login">
+                <Link
+                  to="/login"
+                  style={{
+                    textDecoration: "none",
+                    color: "#0969da",
+                  }}
+                >
                   Already have an account? Sign in
                 </Link>
               </Grid>
