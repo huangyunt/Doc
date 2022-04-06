@@ -16,7 +16,7 @@ export default function IRouter() {
         <Route path="/register" element={<Register />} />
         <Route path="/workspace" element={<WorkSpace />} />
         <Route path="/doc" element={<Doc />} />
-        <Route path="/" element={<Test />} />
+        <Route path="/" element={<WorkSpace />} />
       </Routes>
       {/* <ul style={style}>
         <li>
