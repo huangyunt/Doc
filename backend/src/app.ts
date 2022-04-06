@@ -1,10 +1,12 @@
 // const express = require("express");
 import express from "express";
 import bodyParser from "body-parser";
-import { createAccount, RegisterCode } from "./utils/createAccount";
+import { createAccount } from "./utils/createAccount";
 import { authenAccount } from "./utils/authAccount";
+import { verifyToken, generateToken } from "./utils/authorization";
 
 const app = express();
+app.use("/*", verifyToken); // 注册token验证中间件
 app.use(bodyParser.urlencoded());
 // 注册接口
 app.post("/register", async (req, res) => {
@@ -28,7 +30,8 @@ app.post("/login", async (req, res) => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST",
     });
-    res.send(response);
+    const token = generateToken({ account });
+    res.send({ ...response, token });
 });
 
 // 请求体 parse 中间件，用于 parse json 格式请求体
