@@ -1,5 +1,5 @@
 const inspirecloud = require("@byteinspire/inspirecloud-api");
-import { RegisterCode } from "../../status-code";
+import { RegisterCode } from "../status-code";
 
 export const createAccount = async (account, password) => {
     // 使用 inspirecloud.db.table 获取数据表

@@ -1,4 +1,4 @@
-import { LoginCode } from "./../../status-code/index";
+import { LoginCode } from "../status-code/index";
 const inspirecloud = require("@byteinspire/inspirecloud-api");
 
 export const authenAccount = async (account, password) => {
