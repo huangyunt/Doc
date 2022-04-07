@@ -20,6 +20,7 @@ import {
 import { withHistory, History } from "slate-history";
 import { Button, Icon, Toolbar } from "./components";
 import { Image } from "./components/Image";
+import { InsertImageButton } from "./components/ImgButton";
 
 const HOTKEYS = {
   "mod+b": "bold",
@@ -114,6 +115,7 @@ const RichTextExample = () => {
           format="justify"
           icon="format_align_justify"
         />
+        <InsertImageButton />
       </Toolbar>
       <Editable
         renderElement={renderElement}

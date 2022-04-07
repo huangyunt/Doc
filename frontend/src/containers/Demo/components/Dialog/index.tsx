@@ -5,7 +5,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { AddFile } from "../AddFile";
 import { createDoc } from "../../../../utils/api";
 import "./index.css";
 
@@ -27,7 +26,6 @@ export default function FormDialog() {
 
   return (
     <div>
-      <AddFile handleClick={handleClickOpen} />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle className={"create-doc-dialog"}>
           Start a new document

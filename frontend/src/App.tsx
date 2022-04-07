@@ -9,8 +9,8 @@ import { CustomElement, CustomText } from "./types/index";
 declare module "slate" {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor & HistoryEditor;
-    Element: CustomElement;
-    Text: CustomText;
+    // Element: CustomElement;
+    // Text: CustomText;
   }
 }
 function App() {
