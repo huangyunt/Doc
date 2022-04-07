@@ -15,6 +15,8 @@ import AccountText from "./components/AccountText/AccountText";
 import { authenAccount } from "../../utils/api";
 import { createFromIconfontCN } from "@ant-design/icons";
 import "./index.css";
+import { saveToken } from "../../utils/token";
+import { LoginCode } from "../../status-code";
 
 const LoginIcon = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_3303310_jzl7g2hidn.js",
@@ -33,6 +35,9 @@ export default function Login() {
       "&" +
       `password=${data.get("password")}`;
     const res = await authenAccount(textData);
+    if (LoginCode.Success === res.code) {
+      saveToken(res.token);
+    }
     console.log(res);
   };
 

@@ -5,8 +5,11 @@ import DocRouter from "./routes/DocRouter";
 import WorkspaceRouter from "./routes/WorkspaceRouter";
 import checkJwt from "./routes/CheckJwt";
 import errorHandler from "./middleware/errorHandler";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
 app.use(bodyParser.urlencoded());
 
 /**
@@ -17,9 +20,9 @@ app.use(checkJwt);
 /**
  * 业务路由
  */
-app.use("/api/user", UserRouter);
-app.use("/api/workspace", WorkspaceRouter);
-app.use("/api/doc", DocRouter);
+app.use("/user", UserRouter);
+app.use("/workspace", WorkspaceRouter);
+app.use("/doc", DocRouter);
 
 // 错误处理
 app.use(errorHandler);

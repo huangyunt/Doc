@@ -1,4 +1,5 @@
 import { LoginCode } from "../status-code/index";
+import { generateToken } from "./authorization";
 const inspirecloud = require("@byteinspire/inspirecloud-api");
 
 export const authenAccount = async (account, password) => {
@@ -12,6 +13,7 @@ export const authenAccount = async (account, password) => {
         ? {
               code: LoginCode.Success,
               result: "Login successful",
+              token: generateToken({ account }),
           }
         : {
               code: LoginCode.Fail,
