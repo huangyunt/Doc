@@ -1,7 +1,11 @@
 import React from "react";
 import Icon from "../Icon";
 import "./index.css";
-const Card: React.FC = () => {
+interface IProps {
+  title: string;
+  createTime: string;
+}
+const Card: React.FC<IProps> = ({ title, createTime }) => {
   return (
     <div className="card-wrapper">
       <img
@@ -16,14 +20,14 @@ const Card: React.FC = () => {
               textAlign: "left",
             }}
           >
-            untitle
+            {title}
           </div>
           <div
             className="new_file_creation_topbar--subtext--3YpLo 
                      text--fontPos11--RSei3 
                      text--_fontBase--YWDo0"
           >
-            Design and prototype
+            {title}
           </div>
         </div>
       </div>
