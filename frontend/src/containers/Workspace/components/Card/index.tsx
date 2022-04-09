@@ -4,12 +4,22 @@ import "./index.css";
 interface IProps {
   title: string;
   createTime: string;
+  imgUrl: string;
 }
-const Card: React.FC<IProps> = ({ title, createTime }) => {
+const Card: React.FC<IProps> = ({
+  title,
+  createTime,
+  imgUrl,
+}) => {
   return (
     <div className="card-wrapper">
       <img
-        style={{ display: "block", height: "134px" }}
+        style={{
+          display: "block",
+          height: "134px",
+          width: "100%",
+        }}
+        src={imgUrl}
       ></img>
       <div className="card-bottom-wrapper">
         <Icon />
@@ -27,7 +37,7 @@ const Card: React.FC<IProps> = ({ title, createTime }) => {
                      text--fontPos11--RSei3 
                      text--_fontBase--YWDo0"
           >
-            {title}
+            {createTime}
           </div>
         </div>
       </div>

@@ -6,9 +6,10 @@ import "./index.css";
 
 const style: React.CSSProperties = {
   width: 800,
-  // height: 400,
+  minHeight: 800,
   backgroundColor: "#ffff",
   boxShadow: "rgb(221, 221, 221) 0px 1px 5px 0px",
+  padding: "20px",
 };
 
 // const initialState = State.fromJSON({

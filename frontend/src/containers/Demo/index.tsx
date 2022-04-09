@@ -149,6 +149,7 @@ const toggleBlock = (editor, format) => {
     match: (n) =>
       !Editor.isEditor(n) &&
       SlateElement.isElement(n) &&
+      // @ts-ignore
       LIST_TYPES.includes(n.type) &&
       !TEXT_ALIGN_TYPES.includes(format),
     split: true,
@@ -156,10 +157,13 @@ const toggleBlock = (editor, format) => {
   let newProperties: Partial<SlateElement>;
   if (TEXT_ALIGN_TYPES.includes(format)) {
     newProperties = {
+      // @ts-ignore
       align: isActive ? undefined : format,
     };
   } else {
+    // @ts-ignore
     newProperties = {
+      // @ts-ignore
       type: isActive
         ? "paragraph"
         : isList

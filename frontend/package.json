@@ -19,6 +19,8 @@
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "@wangeditor/editor": "^0.15.20",
+    "@wangeditor/editor-for-react": "^0.6.26",
     "ahooks": "^3.1.14",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",

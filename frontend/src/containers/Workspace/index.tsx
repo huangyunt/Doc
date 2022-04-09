@@ -12,9 +12,11 @@ interface Docs {
   id: string;
   title: string;
   createTime: string;
+  img: string;
 }
 const WorkSpace: React.FC = () => {
-  const [docItems, setDocItems] = useState<Array<Docs>>([]);
+  const [docItems, setDocItems] =
+    useState<Array<Docs>>(items);
   // useAsync(async () => {
   //   const items = (await getDocItems()) as Docs[];
   //   setDocItems(items);
@@ -40,6 +42,7 @@ const WorkSpace: React.FC = () => {
                   <Card
                     title={doc.title}
                     createTime={doc.createTime}
+                    imgUrl={doc.img}
                   />
                 </Grid>
               ))}
@@ -52,3 +55,42 @@ const WorkSpace: React.FC = () => {
 };
 
 export default WorkSpace;
+
+const items = [
+  {
+    id: "1",
+    title: "untitle",
+    createTime: "11-22-33",
+    img: "https://qci1u3.file.qingfuwucdn.com/file/ced200178fb62d0c_1649529139672.png",
+  },
+  {
+    id: "1",
+    title: "untitle",
+    createTime: "11-22-33",
+    img: "https://qci1u3.file.qingfuwucdn.com/file/7b61b4db87f678c9_1649529700610.png",
+  },
+  {
+    id: "1",
+    title: "untitle",
+    createTime: "11-22-33",
+    img: "https://qci1u3.file.qingfuwucdn.com/file/4ae44c2f32c5d171_1649528993134.png",
+  },
+  {
+    id: "1",
+    title: "untitle",
+    createTime: "11-22-33",
+    img: "https://qci1u3.file.qingfuwucdn.com/file/d689d6221c67d488_1649529599289.png",
+  },
+  {
+    id: "1",
+    title: "untitle",
+    createTime: "11-22-33",
+    img: "https://qci1u3.file.qingfuwucdn.com/file/7b61b4db87f678c9_1649529700610.png",
+  },
+];
+items.forEach((val, index) => {
+  items[index] = {
+    ...val,
+    id: index.toString(),
+  };
+});
