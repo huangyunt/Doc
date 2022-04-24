@@ -35,7 +35,14 @@ export const createAccount = async (textData) => {
 
 export const getDocItems = async () => {
   try {
-    const res = await fetch(URL + "doc/");
+    const res = await fetch(URL + "doc/", {
+      method: "POST",
+      mode: "cors" as RequestMode,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: getToken(),
+      },
+    });
     return await res.json();
   } catch (error) {
     console.log("Create doc failed", error);

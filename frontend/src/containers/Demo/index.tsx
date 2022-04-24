@@ -1,15 +1,12 @@
 import React, {
   useCallback,
+  useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import isHotkey from "is-hotkey";
-import {
-  Editable,
-  withReact,
-  useSlate,
-  Slate,
-} from "slate-react";
+import { Editable, withReact, useSlate, Slate } from "slate-react";
 import {
   Editor,
   Transforms,
@@ -30,39 +27,49 @@ const HOTKEYS = {
 };
 
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
-const TEXT_ALIGN_TYPES = [
-  "left",
-  "center",
-  "right",
-  "justify",
-];
+const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"];
 
 const RichTextExample = () => {
-  const [value, setValue] =
-    useState<Descendant[]>(initialValue);
-  const renderElement = useCallback(
-    (props) => <Element {...props} />,
-    []
-  );
-  const renderLeaf = useCallback(
-    (props) => <Leaf {...props} />,
-    []
-  );
-  const editor = useMemo(
-    () => withHistory(withReact(createEditor())),
+  const [value, setValue] = useState<Descendant[]>(initialValue);
+  const renderElement = useCallback((props) => <Element {...props} />, []);
+  const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
+  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+
+  const handleDocDataChange = useDebounce(
+    (value) => {
+      setValue(value);
+      const content = JSON.stringify(value);
+      localStorage.setItem("content", content);
+      console.log("Success to save");
+    },
+    3000,
     []
   );
 
+  function useDebounce(fn, delay, dep = []) {
+    const { current } = useRef({ fn, timer: null } as {
+      fn: any;
+      timer: NodeJS.Timeout | null;
+    });
+    useEffect(
+      function () {
+        current.fn = fn;
+      },
+      [fn]
+    );
+
+    return useCallback(function f(...args) {
+      if (current.timer) {
+        clearTimeout(current.timer);
+      }
+      current.timer = setTimeout(() => {
+        current.fn(...args);
+      }, delay);
+    }, dep);
+  }
+
   return (
-    <Slate
-      editor={editor}
-      value={value}
-      onChange={(value) => {
-        setValue(value);
-        const content = JSON.stringify(value);
-        localStorage.setItem("content", content);
-      }}
-    >
+    <Slate editor={editor} value={value} onChange={handleDocDataChange}>
       <Toolbar
         style={{
           display: "flex",
@@ -74,47 +81,17 @@ const RichTextExample = () => {
       >
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
-        <MarkButton
-          format="underline"
-          icon="format_underlined"
-        />
+        <MarkButton format="underline" icon="format_underlined" />
         <MarkButton format="code" icon="code" />
-        <BlockButton
-          format="heading-one"
-          icon="looks_one"
-        />
-        <BlockButton
-          format="heading-two"
-          icon="looks_two"
-        />
-        <BlockButton
-          format="block-quote"
-          icon="format_quote"
-        />
-        <BlockButton
-          format="numbered-list"
-          icon="format_list_numbered"
-        />
-        <BlockButton
-          format="bulleted-list"
-          icon="format_list_bulleted"
-        />
-        <BlockButton
-          format="left"
-          icon="format_align_left"
-        />
-        <BlockButton
-          format="center"
-          icon="format_align_center"
-        />
-        <BlockButton
-          format="right"
-          icon="format_align_right"
-        />
-        <BlockButton
-          format="justify"
-          icon="format_align_justify"
-        />
+        <BlockButton format="heading-one" icon="looks_one" />
+        <BlockButton format="heading-two" icon="looks_two" />
+        <BlockButton format="block-quote" icon="format_quote" />
+        <BlockButton format="numbered-list" icon="format_list_numbered" />
+        <BlockButton format="bulleted-list" icon="format_list_bulleted" />
+        <BlockButton format="left" icon="format_align_left" />
+        <BlockButton format="center" icon="format_align_center" />
+        <BlockButton format="right" icon="format_align_right" />
+        <BlockButton format="justify" icon="format_align_justify" />
         <InsertImageButton />
       </Toolbar>
       <Editable
@@ -164,11 +141,7 @@ const toggleBlock = (editor, format) => {
     // @ts-ignore
     newProperties = {
       // @ts-ignore
-      type: isActive
-        ? "paragraph"
-        : isList
-        ? "list-item"
-        : format,
+      type: isActive ? "paragraph" : isList ? "list-item" : format,
     };
   }
   Transforms.setNodes<SlateElement>(editor, newProperties);
@@ -189,11 +162,7 @@ const toggleMark = (editor, format) => {
   }
 };
 
-const isBlockActive = (
-  editor,
-  format,
-  blockType = "type"
-) => {
+const isBlockActive = (editor, format, blockType = "type") => {
   const { selection } = editor;
   if (!selection) return false;
 

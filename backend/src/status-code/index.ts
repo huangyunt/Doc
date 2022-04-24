@@ -9,3 +9,13 @@ export enum RegisterCode {
     Existed = 2001,
     Success,
 }
+
+export enum DocsItemCode {
+    Success = 3001,
+    Fail,
+}
+
+export enum CreateDocCode {
+    Success = 4001,
+    Fail,
+}

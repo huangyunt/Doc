@@ -1,30 +1,40 @@
-describe("Login", () => {
-  it("should login with failure", async () => {
-    browser = await puppeteer.launch({
-      headless: false,
-      defaultViewport: {
-        width: 1920,
-        height: 1080,
-      },
-      args: ["--start-maximized"],
-    });
-    const page = await browser.newPage();
-    const params = "/user/login";
-    await page.goto(`${BASE_URL}${params}`);
-    console.log("Page Loaded：", `${BASE_URL}${params}`);
-    // await page.screenshot({
-    path: "screenshot.png";
+const inspirecloud = require("@byteinspire/inspirecloud-api");
+export const screenshot = async (token) => {
+  const URLTable = inspirecloud.db.table("url");
+  const thumbTable = inspirecloud.db.table("thumb");
+  const URL = await URLTable.where({ token }).findOne();
+  const browser = await puppeteer.launch({
+    headless: false,
   });
-  const username = await page.$x(XPATH_USERNAME);
-  // console.log('elements：', elements);
-  await username?.[0]?.type("mockuser");
-  const password = await page.$x(XPATH_PASSWORD);
-  await password?.[0].type("wrong_password");
-  const btn = await page.$x(XPATH_BUTTON_LOGIN);
-  await btn?.[0].click();
-  // should display error
-  await page.waitForSelector(".ant-alert-error");
-  await page.waitFor(TIME_WAIT);
-  await page.close();
-  browser.close();
-});
+  const page = await browser.newPage();
+  await page.goto(URL);
+  await page.setViewport({ width: 600, height: 800 });
+  const imgBuffer = await page.screenshot();
+  // 截图调用文件上传接口转为 url 形式
+  const { imgUrl } = await inspirecloud.file.upload(
+    "screenshot", // 文件名
+    imgBuffer // 文件内容
+  );
+  // 存入数据库
+  const thumbItem = thumbTable.create({ token, url: imgUrl });
+  await thumbTable.save(thumbItem);
+  await browser.close();
+};
+
+// client.js
+
+const WebSocket = require("ws");
+const url = "ws://localhost:8080";
+const connection = new WebSocket(url);
+
+connection.onopen = () => {
+  connection.send("Message From Client");
+};
+
+connection.onerror = (error) => {
+  console.log(`WebSocket error: ${error}`);
+};
+
+connection.onmessage = (e) => {
+  console.log(e.data);
+};
