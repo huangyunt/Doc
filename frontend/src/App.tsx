@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { BaseEditor } from "slate";
 import { ReactEditor } from "slate-react";
 import { HistoryEditor } from "slate-history";
-import { CustomElement, CustomText } from "./types/index";
+import { useEffect } from "react";
 declare module "slate" {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor & HistoryEditor;
@@ -22,5 +22,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

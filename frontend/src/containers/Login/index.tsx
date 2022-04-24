@@ -6,10 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
-import {
-  createTheme,
-  ThemeProvider,
-} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PasswordText from "./components/PasswordText/PasswordText";
 import AccountText from "./components/AccountText/AccountText";
 import { authenAccount } from "../../utils/api";
@@ -17,6 +14,7 @@ import { createFromIconfontCN } from "@ant-design/icons";
 import "./index.css";
 import { saveToken } from "../../utils/token";
 import { LoginCode } from "../../status-code";
+import { useNavigate } from "react-router-dom";
 
 const LoginIcon = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_3303310_jzl7g2hidn.js",
@@ -25,29 +23,26 @@ const LoginIcon = createFromIconfontCN({
 const theme = createTheme();
 
 export default function Login() {
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const textData =
-      `account=${data.get("email")}` +
-      "&" +
-      `password=${data.get("password")}`;
+      `account=${data.get("email")}` + "&" + `password=${data.get("password")}`;
+    // 调用登录 api 发送请求
     const res = await authenAccount(textData);
     if (LoginCode.Success === res.code) {
+      // 保存 jwt 到 localstorage 中
       saveToken(res.token);
+      navigate("/workspace");
+    } else {
+      alert("用户名或密码错误");
     }
-    console.log(res);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container
-        component="main"
-        maxWidth="xs"
-        style={{ paddingTop: 80 }}
-      >
+      <Container component="main" maxWidth="xs" style={{ paddingTop: 80 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -57,10 +52,7 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <LoginIcon
-            type="icon-a-huaban2fuben15"
-            className="login-svg"
-          />
+          <LoginIcon type="icon-a-huaban2fuben15" className="login-svg" />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>

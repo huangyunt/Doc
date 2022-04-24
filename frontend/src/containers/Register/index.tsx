@@ -1,4 +1,3 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -7,13 +6,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {
-  createTheme,
-  ThemeProvider,
-} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { createAccount } from "../../utils/api";
 import { createFromIconfontCN } from "@ant-design/icons";
 import "./index.css";
+import { useState } from "react";
+import { RegisterCode } from "../../status-code";
 
 const RegisterIcon = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_3303310_jzl7g2hidn.js",
@@ -22,26 +20,32 @@ const RegisterIcon = createFromIconfontCN({
 const theme = createTheme();
 
 export default function Register() {
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const textData =
-      `account=${data.get("email")}` +
-      "&" +
-      `password=${data.get("password")}`;
-    const res = await createAccount(textData);
-    console.log(res);
+    // 判断两次输入密码是否一致
+    if (password !== confirmPassword) {
+      alert("两次输入密码不一致");
+    } else {
+      const data = new FormData(event.currentTarget);
+      const textData =
+        `account=${data.get("email")}` +
+        "&" +
+        `password=${data.get("password")}`;
+      // 调用createAccount api 发送请求
+      const res = await createAccount(textData);
+      if (res.code === RegisterCode.Existed) {
+        alert("用户名已存在");
+      } else {
+        alert("注册成功");
+      }
+    }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container
-        component="main"
-        maxWidth="xs"
-        style={{ paddingTop: 80 }}
-      >
+      <Container component="main" maxWidth="xs" style={{ paddingTop: 80 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -51,10 +55,7 @@ export default function Register() {
             alignItems: "center",
           }}
         >
-          <RegisterIcon
-            type="icon-a-huaban2fuben14"
-            className="register-svg"
-          />
+          <RegisterIcon type="icon-a-huaban2fuben14" className="register-svg" />
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
@@ -89,6 +90,7 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -100,6 +102,7 @@ export default function Register() {
                   type="comfirm-password"
                   id="comfirm-password"
                   autoComplete="comfirm-password"
+                  onChange={(event) => setConfirmPassword(event.target.value)}
                 />
               </Grid>
             </Grid>

@@ -4,10 +4,11 @@ import Grid from "@mui/material/Grid";
 import NavBar from "../../components/IconBreadcrumbs";
 import "./index.css";
 import Card from "./components/Card";
-import useAsync from "react-use";
+import useAsync, { useMount } from "react-use";
 import { useState } from "react";
 import { getDocItems } from "../../utils/api";
 import FormDialog from "./components/Dialog";
+import { getToken } from "../../utils/token";
 interface Docs {
   id: string;
   title: string;
@@ -15,12 +16,11 @@ interface Docs {
   img: string;
 }
 const WorkSpace: React.FC = () => {
-  const [docItems, setDocItems] =
-    useState<Array<Docs>>(items);
-  // useAsync(async () => {
-  //   const items = (await getDocItems()) as Docs[];
-  //   setDocItems(items);
-  // });
+  const [docItems, setDocItems] = useState<Array<Docs>>(items);
+  // useMount(() => {
+  //   // 从 localstorage 中获得 jwt
+  //   const token = getToken();
+  // })
   return (
     <React.Fragment>
       <NavBar />
