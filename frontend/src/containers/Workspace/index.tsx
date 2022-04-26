@@ -23,12 +23,12 @@ const WorkSpace: React.FC = () => {
   useAsync(async () => {
     const res = await getDocItems();
     if (res.code === DocsItemCode.Success) {
-      setDocItems(res.items);
+      setDocItems(res.list);
     } else {
       alert("请重新登录");
       navigate("/login");
     }
-  });
+  }, []);
 
   return (
     <React.Fragment>
@@ -100,6 +100,13 @@ const items = [
     title: "untitle",
     createTime: "11-22-33",
     img: "https://qci1u3.file.qingfuwucdn.com/file/7b61b4db87f678c9_1649529700610.png",
+  },
+  {
+    id: "1",
+    token: "ss",
+    title: "dssd",
+    createTime: "11-22-33",
+    img: "https://qci1u3.file.qingfuwucdn.com/file/c57892ce508f08ed_1650835261419.png",
   },
 ];
 items.forEach((val, index) => {

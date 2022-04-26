@@ -20,7 +20,8 @@ export default function IRouter() {
       </Routes>
       <ul style={style}>
         <li>
-          <Link to="/login">login</Link>
+          {/* <Link to="/login">login</Link> */}
+          <a href="/login">login</a>
         </li>
         <li>
           <Link to="/register">register</Link>
@@ -29,7 +30,7 @@ export default function IRouter() {
           <Link to="/workspace">workspace</Link>
         </li>
         <li>
-          <Link to="/doc">doc</Link>
+          <a href="/doc">doc</a>
         </li>
       </ul>
     </React.Fragment>

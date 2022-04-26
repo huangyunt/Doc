@@ -8,6 +8,8 @@ userRouter.post("/login", async (req, res) => {
     console.log("@@", req.body);
     const { account, password } = req.body;
     const response = await authenAccount(account, password);
+    console.log(response);
+
     res.send(response);
 });
 

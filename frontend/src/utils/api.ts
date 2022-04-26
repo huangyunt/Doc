@@ -6,7 +6,7 @@ const header = {
   mode: "cors" as RequestMode,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: getToken(),
+    Authorization: "Bearer " + getToken(),
   },
 };
 export const authenAccount = async (textData) => {
@@ -35,17 +35,13 @@ export const createAccount = async (textData) => {
 
 export const getDocItems = async () => {
   try {
-    const res = await fetch(URL + "doc/", {
-      method: "POST",
-      mode: "cors" as RequestMode,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: getToken(),
-      },
+    const res = await fetch(URL + "workspace/list", {
+      ...header,
+      method: "GET",
     });
     return await res.json();
   } catch (error) {
-    console.log("Create doc failed", error);
+    console.log("Get doc items failed", error);
   }
 };
 

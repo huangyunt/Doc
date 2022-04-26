@@ -1,16 +1,24 @@
 import jwt from "jsonwebtoken";
 import { LoginCode } from "../status-code";
+const inspirecloud = require("@byteinspire/inspirecloud-api");
 
 const secretKey = "secretKey";
 
 // 生成token
 export const generateToken = function (payload) {
-    const token =
-        "Bearer " +
-        jwt.sign(payload, secretKey, {
-            expiresIn: 60 * 60,
-        });
+    const { account } = payload;
+    const jsonwebtoken = jwt.sign(payload, secretKey, {
+        expiresIn: 60 * 60,
+    });
+    const token = "Bearer " + jsonwebtoken;
+    saveToken(jsonwebtoken, account);
     return token;
+};
+
+const saveToken = async (token, account) => {
+    const JwtToAccountTable = inspirecloud.db.table("jwt-to-account");
+    const item = JwtToAccountTable.create({ jwt: token, account });
+    await JwtToAccountTable.save(item);
 };
 
 // 验证token
