@@ -1,14 +1,17 @@
+import { getAccountByJwt } from "./getAccountByJwt";
 const inspirecloud = require("@byteinspire/inspirecloud-api");
 import { v1 as uuidv1 } from "uuid";
 import { CreateDocCode } from "../status-code";
-export const createDocument = async (token) => {
+export const addDocument = async (jwt: string) => {
     // 通过 uuid 新建文档的唯一 token
     const id = uuidv1();
     // 获取数据表表
-    const AccountTable = inspirecloud.db.table("document");
-    const docItem = AccountTable.create({ token, docToken: id });
+    const DocListTable = inspirecloud.db.table("doc-list");
+    // 根据 Jwt 获取账号
+    const account = await getAccountByJwt(jwt);
+    const docItem = DocListTable.create({ account, docToken: id });
     try {
-        await AccountTable.save(docItem);
+        await DocListTable.save(docItem);
         return {
             code: CreateDocCode.Success,
             result: "Success to create doc",

@@ -1,12 +1,11 @@
 import { DocsItemCode } from "../status-code/index";
+import { getAccountByJwt } from "./getAccountByJwt";
 const inspirecloud = require("@byteinspire/inspirecloud-api");
 
 export const getDocList = async (jwt: string) => {
-    const JwtToAccountTable = inspirecloud.db.table("jwt-to-account");
     const DocListTable = inspirecloud.db.table("doc-list");
-    const { account } = await JwtToAccountTable.where({
-        jwt,
-    }).findOne();
+    // 根据 Jwt 获取账号
+    const account = await getAccountByJwt(jwt);
     const docList = await DocListTable.where({ account }).find();
     const list = docList.map((item) => item.docToken);
     return {
