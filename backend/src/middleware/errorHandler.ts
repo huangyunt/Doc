@@ -1,7 +1,6 @@
 import { URL } from "../doc.config";
 export default function errorHandler(err, req, res, next) {
-    console.log("error");
-
+    console.log("error: ", err);
     // if (err.name === "UnauthorizedError") {
     //     return res.redirect(307, `${URL}/login`);
     // }

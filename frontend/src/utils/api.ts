@@ -47,7 +47,7 @@ export const getDocItems = async () => {
 
 export const createDoc = async (textData) => {
   try {
-    const res = await fetch(URL + "doc/create", {
+    const res = await fetch(URL + "workspace/add", {
       ...header,
       body: textData, // body data type must match "Content-Type" header
     });

@@ -9,22 +9,31 @@ import { AddFile } from "../AddFile";
 import { createDoc } from "../../../../utils/api";
 import "./index.css";
 
-export default function FormDialog() {
+export default function FormDialog({ setDocItems }) {
   const [open, setOpen] = React.useState(false);
-
+  const [title, setTitle] = React.useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
-  const createNewDoc = () => {
-    const data = "";
-    createDoc(data);
+  const createNewDoc = async () => {
+    const res = await createDoc(title);
+    console.log(res.docInfo);
+    const { docToken, imgURL, createTime } = res.docInfo;
+    setDocItems((oldItems) => [
+      ...oldItems,
+      {
+        id: 0,
+        token: docToken,
+        title: "dfadfads",
+        createTime,
+        img: imgURL,
+      },
+    ]);
     handleClose();
   };
-
   return (
     <div>
       <AddFile handleClick={handleClickOpen} />
@@ -41,6 +50,7 @@ export default function FormDialog() {
             type="email"
             fullWidth
             variant="standard"
+            onChange={(event) => setTitle(event.target.value)}
           />
         </DialogContent>
         <DialogActions>

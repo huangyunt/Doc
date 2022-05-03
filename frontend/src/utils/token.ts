@@ -4,5 +4,6 @@ export const saveToken = (jwtToken) => {
 };
 
 export const getToken = () => {
-  return localStorage.getItem("token") || "";
+  const token = localStorage.getItem("token") || "";
+  return token;
 };

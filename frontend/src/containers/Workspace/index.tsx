@@ -19,7 +19,7 @@ interface Docs {
 }
 const WorkSpace: React.FC = () => {
   const navigate = useNavigate();
-  const [docItems, setDocItems] = useState<Array<Docs>>(items);
+  const [docItems, setDocItems] = useState<Array<Docs>>([]);
   useAsync(async () => {
     const res = await getDocItems();
     if (res.code === DocsItemCode.Success) {
@@ -35,7 +35,7 @@ const WorkSpace: React.FC = () => {
       <NavBar />
       <div className="workspace-wrapper">
         <Container sx={{ marginTop: "20px" }}>
-          <FormDialog />
+          <FormDialog setDocItems={setDocItems} />
           <div
             style={{
               paddingTop: "20px",
